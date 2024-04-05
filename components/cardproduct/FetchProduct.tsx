@@ -1,8 +1,8 @@
 "use client";
 
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
-// Define a type for the post object
 interface Post {
   price: number;
   description: string;
@@ -11,6 +11,8 @@ interface Post {
   title: string;
 }
 
+const ENDPOINT = "https://fakestoreapi.com/products";
+
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -18,13 +20,12 @@ const Posts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://fakestoreapi.com/products');
+        const response = await fetch(ENDPOINT);
         const data: Post[] = await response.json(); 
         setPosts(data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
-        
       }
     };
     
@@ -46,11 +47,16 @@ const Posts = () => {
       <h1 className="text-center text-2xl font-bold mt-4 mb-4">Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {posts.map(post => (
+          
           <div key={post.id} className="bg-gray-100 rounded p-4">
-            <img src={post.image} alt={post.title} className="mx-auto w-48 h-48 object-cover" />
+            <Link key={post.id} href={`/product/${post.id}`}>
+              <img src={post.image} alt={post.title} className="mx-auto w-48 h-48 object-cover" />
+            </Link>
+            
             <h2 className="text-center text-lg text-black font-semibold mt-2">{post.title}</h2>
             {/* <p className="text-gray-600">{post.description}</p> */}
             <p className="text-blue-500 text-center font-semibold mt-2">${post.price.toFixed(2)}</p>
+          
           </div>
         ))}
       </div>

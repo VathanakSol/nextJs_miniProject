@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import FetchProduct from "./product/FetchProduct";
-import ProductPage from "./product/page";
+import FetchProduct from "../../components/cardproduct/FetchProduct";
+import ProductPage from "../../components/cardproduct/FetchProduct";
 
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <>
       <div>
-          <FetchProduct />
+          <p className="h-screen grid place-content-center">This is Home Page</p>
       </div>
     </>
   );
