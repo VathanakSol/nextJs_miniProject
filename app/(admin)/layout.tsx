@@ -19,13 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="">
 
-        <div className="">
+        <aside className="h-screen absolute top-0 left-0">
           <Sidebar children={undefined} />
-        </div>
-        
-        {children}
+        </aside>
+        <main>
+          {children}
+        </main>
         
         
       </body>
