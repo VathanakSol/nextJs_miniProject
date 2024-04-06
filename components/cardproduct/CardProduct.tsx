@@ -1,4 +1,5 @@
 import { Card } from "flowbite-react";
+import Image from "next/image";
 
 type PropsType = {
     title: string;
@@ -14,9 +15,8 @@ export default function CardProduct({title, image, price, onClick}:PropsType) {
             onClick={onClick}
             className="cursor-pointer bg-yellow-500 w-screen"
             renderImage={()=>(
-                <img src={image}
-                     className="h-[100vh] object-cover overflow-hidden"
-                />
+                <Image src={image}
+              className="h-[100vh] object-cover overflow-hidden" alt={""}                />
             )}
         >
         </Card>

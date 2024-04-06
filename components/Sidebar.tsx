@@ -18,7 +18,7 @@ const SidebarContext = createContext<SidebarContextProps>({
   expanded: true,
 });
 
-export default function Sidebar({ children }: { children: ReactNode }) {
+export default function Sidebar() {
   const [expanded, setExpanded] = useState(true);
 
   return (
@@ -46,7 +46,6 @@ export default function Sidebar({ children }: { children: ReactNode }) {
                 <SidebarItem icon={undefined} text={"Home"} />
                 <SidebarItem icon={undefined} text={"Sign Up"} />
                 <SidebarItem icon={undefined} text={"Log In"} />
-                {children}
                 
             </ul>
         </SidebarContext.Provider>

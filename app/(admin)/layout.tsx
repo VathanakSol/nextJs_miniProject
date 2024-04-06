@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className="">
 
         <aside className="h-screen absolute top-0 left-0">
-          <Sidebar children={undefined} />
+          <Sidebar />
         </aside>
         <main>
           {children}

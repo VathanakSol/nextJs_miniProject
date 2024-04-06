@@ -6,6 +6,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import Image from 'next/image';
 
 interface Product {
     id: string;
@@ -63,7 +64,7 @@ export default function Dashboard() {
     };
 
     const imageBodyTemplate = (product: Product) => {
-      return <img src={`${product.image}`} alt={product.image} style={{ width: '4rem', maxWidth: '100%', height: 'auto' }} />;
+      return <Image src={`${product.image}`} alt={product.image} style={{ width: '4rem', maxWidth: '100%', height: 'auto' }} />;
     };
 
     const priceBodyTemplate = (product: Product) => {
