@@ -14,6 +14,7 @@
 // }
 
 
+import { px } from 'framer-motion';
 import { Metadata } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -28,11 +29,11 @@ export default function AboutUs() {
       <>
         <div className="grid place-content-center text-center w-[100vw] p-8">
           <p className="text-4xl p-12 font-bold text-gray-200">&#10077; Fast, Saving and Quality &#10078;</p>
-          <Image src="about01.jpg" alt="seller with customer are shaking hand"/>
+          <Image src="/about01.jpg" alt="seller with customer are shaking hand" width={800} height={1200}/>
         </div><br />
         <hr />
         <div className="grid grid-cols-2 place-content-center text-center w-[100vw] p-16">
-          <Image src="about01.jpg" alt="seller with customer are shaking hand"/>
+          <Image src="/about01.jpg" alt="seller with customer are shaking hand" width={600} height={1000}/>
           <div className="pl-12 py-4 text-center">
             <p className="text-4xl p-12 font-bold text-gray-200">&#10077; Fast Delivery &#10078;</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit repellat consequuntur ipsam dolor necessitatibus porro, nemo deserunt soluta, totam architecto temporibus assumenda, eligendi cupiditate illo veniam rerum autem beatae quod.</p>
@@ -44,7 +45,7 @@ export default function AboutUs() {
             <p className="text-4xl p-12 font-bold text-gray-200">&#10077; <span>High Saving and Best Quality</span> &#10078;</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit repellat consequuntur ipsam dolor necessitatibus porro, nemo deserunt soluta, totam architecto temporibus assumenda, eligendi cupiditate illo veniam rerum autem beatae quod.</p>
           </div>
-          <Image src="about01.jpg" alt="seller with customer are shaking hand"/>
+          <Image src="/about01.jpg" alt="seller with customer are shaking hand" width={600} height={1000}/>
         </div>
         
       </>

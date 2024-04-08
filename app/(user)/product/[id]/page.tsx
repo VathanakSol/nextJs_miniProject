@@ -8,61 +8,87 @@
 import CardProductDetail from "@/components/cardproduct/CardProductDetail";
 import { Metadata, ResolvingMetadata } from "next";
 
-
-type Props = {
-	params: { id: string };
-	searchParams: { [key: string]: string | string[] | undefined };
-};
-
-type PropsParams = {
-	params: {
-		id: number;
-	};
-	searchParams: any;
-
-};
+interface Props {
+  params: { id: string };
+}
 
 export async function generateMetadata(
-	{ params, searchParams }: Props,
-	parent: ResolvingMetadata
+  { params }: Props,
+  _parent: ResolvingMetadata
 ): Promise<Metadata> {
-	const id = params.id;
-	
-	const product = await fetch(`https://fakestoreapi.com/products/${id}`).then((res) => res.json());
+  try {
+    const response = await fetch(
+      `https://fakestoreapi.com/products/${params.id}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch product data");
+    }
 
-	return {
-		title: product.title,
-		description: product.description,
-		openGraph: {
-			images: product.image,
-		},
-	};
+    const product = await response.json();
+
+    return {
+      title: product.title,
+      description: product.description,
+      openGraph: {
+        images: product.image ? [product.image] : [],
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+    // Return default metadata in case of error
+    return {
+      title: "Default Title",
+      description: "Default Description",
+      openGraph: {
+        images: ["https://example.com/default-image.jpg"],
+      },
+    };
+  }
 }
 
 const ENDPOINT = "https://fakestoreapi.com/products/";
 
-export const getData = async (id: number) => {
-	const res = await fetch(`${ENDPOINT}${id}`);
-	const data = await res.json();
-	console.log(data);
-	return data;
+export const getData = async (id: number): Promise<any> => {
+  try {
+    const response = await fetch(`${ENDPOINT}${id}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch product data");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // Return null or default data in case of error
+    return null;
+  }
 };
 
-export default async function Detail(props: PropsParams) {
-	let data = await getData(props.params.id);
+export default async function Detail({ params }: Props) {
+  const fetchData = async () => {
+    try {
+      const data = await getData(Number(params.id));
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
+  };
 
-	return (
-		<div className="h-screen grid place-content-center">
-			<CardProductDetail
-				title={data?.title || "NoTitle"}
-				description={data?.description || "No Description"}
-				image={
-					data?.image ||
-					"https://i0.wp.com/sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png?ssl=1"
-				}
-                price={data?.price || "Free"}
-			/>
-		</div>
-	);
+  const data = await fetchData();
+
+  return (
+    <div className="h-screen grid place-content-center">
+      <CardProductDetail
+        title={data?.title || "No Title"}
+        description={data?.description || "No Description"}
+        image={
+          data?.image ||
+          "https://i0.wp.com/sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png?ssl=1"
+        }
+        price={data?.price || "Free"}
+      />
+    </div>
+  );
 }
+
 

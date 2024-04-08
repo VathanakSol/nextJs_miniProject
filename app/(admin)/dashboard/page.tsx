@@ -64,7 +64,7 @@ export default function Dashboard() {
     };
 
     const imageBodyTemplate = (product: Product) => {
-      return <Image src={`${product.image}`} alt={product.image} style={{ width: '4rem', maxWidth: '100%', height: 'auto' }} />;
+      return <Image width={350} height={500} src={`${product.image}`} alt={product.image} />;
     };
 
     const priceBodyTemplate = (product: Product) => {
