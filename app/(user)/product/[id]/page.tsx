@@ -48,7 +48,7 @@ export async function generateMetadata(
 
 const ENDPOINT = "https://fakestoreapi.com/products/";
 
-export const getData = async (id: number): Promise<any> => {
+const getData = async (id: number): Promise<any> => {
   try {
     const response = await fetch(`${ENDPOINT}${id}`);
     if (!response.ok) {
